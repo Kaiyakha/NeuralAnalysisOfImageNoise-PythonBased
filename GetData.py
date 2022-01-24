@@ -1,3 +1,6 @@
+# A script to comprise all the necessary data
+# To train the neural network
+
 import os, csv
 import numpy as np
 from PIL import Image

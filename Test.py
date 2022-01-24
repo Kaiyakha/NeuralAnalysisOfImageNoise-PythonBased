@@ -1,3 +1,5 @@
+# A script to test the network
+
 import os, dill
 from GetData import *
 

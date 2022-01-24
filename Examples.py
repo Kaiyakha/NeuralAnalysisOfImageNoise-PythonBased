@@ -1,16 +1,19 @@
+# An example to show how the trained network works
+
 import os, dill
 import numpy as np
 from PIL import Image
 
-TRESHOLD = 0.2
-PATH = os.path.dirname(__file__) + "/Patches/Noisy_Patches/B/"
+TRESHOLD = 0.2 # Affects sensitivity of the network
+PATH = os.path.dirname(__file__)
+DATA_PATH = PATH + "/Patches/Noisy_Patches/R/"
 
-img = Image.open(PATH + "2548, 504.bmp")
+img = Image.open(DATA_PATH + "0, 2016.bmp")
 img_matrix = np.asarray(img).reshape(img.width * img.height)
 img.show()
 img.close()
 
-with open("Practice/trained_nn.pkl", "rb") as pklfile:
+with open(PATH + "/trained_nn.pkl", "rb") as pklfile:
     nn = dill.load(pklfile)
 
 nn.forward_prop(img_matrix)

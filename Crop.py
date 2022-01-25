@@ -12,7 +12,15 @@ except FileExistsError: pass
 
 scene = Image.open(PATH + FILE)
 
+BAR_CAPACITY = 300
+BARS = (scene.width - WIDTH) // BAR_CAPACITY
+if BARS % BAR_CAPACITY == 0: BARS -= 1
+
+print(f"\rCropping |{'-' * BARS}|\0", end = '')
 for i in range(0, scene.width - WIDTH, WIDTH):
+    if i % BAR_CAPACITY < WIDTH:
+        loaded = i // BAR_CAPACITY; left = BARS - loaded
+        print(f"\rCropping |{'█' * loaded}{'-' * left}|\0", end = '')
     for j in range(0, scene.height - HEIGHT, HEIGHT):
         patch = scene.crop((i, j, i + WIDTH, j + HEIGHT))
         patch.save(PATCHES_PATH + f"{i}, {j}.bmp", 'bmp')
